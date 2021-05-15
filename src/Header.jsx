@@ -1,12 +1,16 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import './Header.css';
+import { TodoContext } from './TodoStore.js';
 
-const Header = ({ todos }) => {
+const Header = () => {
+    const { todos } = useContext(TodoContext);
     return (
-        <div>
+        <>
             <h1> Hello todo </h1>
-            <div className='countInfo'>해야할일  : {todos.length}</div>
-        </div>
+            <div className='countInfo'>
+                해야할일  : {todos.filter(v => (v.status === 'todo')).length}
+            </div>
+        </>
     )
 }
 export default Header;

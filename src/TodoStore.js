@@ -1,11 +1,13 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-import { useEffect, useState } from 'react';
 import List from './List.jsx';
 import useFetch from './useFetch.js';
 import Header from './Header.jsx';
+import Form from './Form.jsx';
 
-const App = () => {
+export const TodoContext = React.createContext();
+
+const TodoStore = () => {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState();
 
@@ -39,16 +41,12 @@ const App = () => {
 
 
   return (
-    <>
-      <Header todos={todos} />
-      <form action="">
-        <input type="text" name="" onChange={changeInputData} />
-        <button onClick={addTodo}>할일추가</button>
-      </form>
-
-      <List todos={todos} loading={loading} changeTodoStatus={changeTodoStatus} />
-    </>
+    <TodoContext.Provider value={{ todos, addTodo, changeInputData, loading, changeTodoStatus }} >
+      <Header />
+      <Form />
+      <List />
+    </TodoContext.Provider>
   )
 
 }
-export default App;
+export default TodoStore;
