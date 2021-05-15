@@ -3,11 +3,13 @@ import { TodoContext } from './TodoStore.js';
 
 const Form = () => {
     const inputRef = useRef(false);
-    const{addTodo} = useContext(TodoContext);
-    const addTodoData = (e) =>{
+    const {dispatch} = useContext(TodoContext);
+
+    const addTodoData = (e) => {
         e.preventDefault();
-        addTodo(inputRef.current.value);
+        dispatch({type:'ADD_TODO', payload :inputRef.current.value})
     }
+
     return (
         <>
             <form action="">
@@ -17,4 +19,5 @@ const Form = () => {
         </>
     )
 }
+
 export default Form;
